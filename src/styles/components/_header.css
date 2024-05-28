@@ -1,5 +1,3 @@
-@import url("../abstracts/_utilities.css");
-
 header {
   padding: 2rem 0rem;
 }
@@ -16,7 +14,7 @@ header {
   transition: filter 300ms;
 }
 #brandmark__logo:hover {
-  filter: drop-shadow(0 0 2em var(--color-primary));
+  filter: drop-shadow(0 0 2em var(--clr-primary));
 }
 
 /* @keyframes logo-spin {
