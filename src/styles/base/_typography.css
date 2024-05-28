@@ -1,9 +1,29 @@
-a {
-    font-weight: 500;
-    color: var(--color-primary);
-    text-decoration: none;
-  }
+:root {
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-regular);
+  color: var(--clr-white);
+}
+
+p, ol, a {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-regular);
+  text-decoration: none;
+  color: var(--clr-white);
+}
 
   a:hover {
-    color: var(--color-secondary);
+    color: var(--clr-secondary);
   }
