@@ -1,11 +1,13 @@
 @import url("../abstracts/_utilities.css");
 
+header {
+  padding: 2rem 0rem;
+}
+
 #brandmark {
   display: flex;
   align-items: center;
 }
-
-
 
 #brandmark__logo {
   height: 3em;
