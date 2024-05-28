@@ -1,5 +1,6 @@
 import viteLogo from "/vite.svg";
 import "../styles";
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   return (
@@ -8,7 +9,7 @@ export function Header() {
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <h1>Helldivers Academy</h1>
+        <NavLink to={"/"}><h1>Helldivers Academy</h1></NavLink>
       </div>
     </>
   );
