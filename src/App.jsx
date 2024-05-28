@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { BaseLayout, HomePage, UserGuidePage } from './pages'
+import { BaseLayout, HomePage, PageNotFound, UserGuidePage } from './pages'
 
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
           <Route path="/" element={<BaseLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/userguide" element={<UserGuidePage />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
