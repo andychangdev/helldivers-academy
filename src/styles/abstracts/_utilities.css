@@ -1,7 +1,27 @@
 /* Colors */
 :root {
-    --color-primary: gold;
-    --color-secondary: goldenrod;
-    --neutral-black: #1a1a1a;
-    --neutral-white: #fafafa;
+
+    /* Colour Palette */
+    --clr-primary: gold;
+    --clr-secondary: goldenrod;
+    --clr-black: #1a1a1a;
+    --clr-white: #fafafa;
+
+    /* Font Family */
+    --ff-regular: Verdana, sans-serif;
+    --ff-heading: Courier, monospace;
+
+    /* Font Size */
+    --fs-regular: 1rem;
+    --fs-heading: 1.8rem;
+    --fs-subheading: 1.2rem;
+
+    /* Font Weight */
+    --fw-regular: 400;
+    --fw-semibold: 600;
+
+    /* Spacer */
+    --spacer-400: 1rem;
+    --spacer-500: 2rem;
   }
+  
