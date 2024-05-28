@@ -1,5 +1,4 @@
 import viteLogo from "/vite.svg";
-import "../styles";
 import { NavLink } from "react-router-dom";
 
 export function Header() {
