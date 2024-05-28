@@ -1,16 +1,23 @@
 @import url("../abstracts/_utilities.css");
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
+#brandmark {
+  display: flex;
+  align-items: center;
+}
+
+
+
+#brandmark__logo {
+  height: 3em;
+  padding-right: 1em;
   will-change: filter;
   transition: filter 300ms;
 }
-.logo:hover {
+#brandmark__logo:hover {
   filter: drop-shadow(0 0 2em var(--color-primary));
 }
 
-@keyframes logo-spin {
+/* @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
@@ -20,7 +27,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a .logo {
+  a #logo {
     animation: logo-spin infinite 20s linear;
   }
-}
+} */

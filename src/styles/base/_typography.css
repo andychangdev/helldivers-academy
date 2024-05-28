@@ -1,9 +1,9 @@
 a {
     font-weight: 500;
-    color: var(--neutral-white);
+    color: var(--color-primary);
     text-decoration: none;
   }
 
   a:hover {
-    color: var(--color-primary);
+    color: var(--color-secondary);
   }

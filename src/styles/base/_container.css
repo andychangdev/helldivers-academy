@@ -23,4 +23,8 @@
     grid-column: full-width;
   }
   
+  .wrapper {
+    display: flex;
+    justify-content: center;
+  }
   
