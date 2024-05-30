@@ -6,7 +6,7 @@ export function Header() {
       <header className="wrapper">
           <NavLink to={"/"} id="brandmark">
             <img src={viteLogo} id="brandmark__logo" alt="Vite logo" />
-            <h1>Helldivers Academy</h1>
+            <h1 id="brandmark_text">Helldivers Academy</h1>
           </NavLink>
       </header>
   );

@@ -27,3 +27,11 @@ p, ol, a {
   a:hover {
     color: var(--clr-secondary);
   }
+
+h1, p {
+  margin-bottom: var(--spacer-400);
+}
+
+  #brandmark_text {
+    margin-bottom: 0;
+  }
