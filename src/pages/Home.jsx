@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 
 export function HomePage() {
-  const [stratagem, setStratagem] = useState({ name: "", image: ""});
+  const [stratagem, setStratagem] = useState({ name: "", image: "", keys: []});
   const [loading, setLoading] = useState(true);
+
+  const arrowMap = {
+    up: "\u2B06", 
+    down: "\u2B07",
+    left: "\u2B05", 
+    right: "\u2B95" 
+  };
 
   async function getStratagem() {
     const HELLHUBAPI = `https://api-hellhub-collective.koyeb.app/api/stratagems/${Math.floor(Math.random() * 59) + 1}`;
@@ -13,6 +20,7 @@ export function HomePage() {
       setStratagem({
         name: stratagem.data.name,
         image: stratagem.data.imageUrl,
+        keys: stratagem.data.keys,
       });
     } catch (error) {
       console.error("Error fetching stratagem:", error);
@@ -45,11 +53,12 @@ export function HomePage() {
         <h2>{stratagem.name}</h2>
       </div>
 
-      <div className="stratagrem__arrows">
-        <span className="arrow">&#11013;</span>
-        <span className="arrow">&#11014;</span>
-        <span className="arrow">&#11157;</span>
-        <span className="arrow">&#11015;</span>
+      <div className="arrow-container">
+        {stratagem.keys.map((key, index) => (
+          <span key={index} className="arrow">
+            {arrowMap[key]}
+          </span>
+        ))}
       </div>
 
     </section>
