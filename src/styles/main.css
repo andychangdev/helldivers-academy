@@ -1,6 +1,7 @@
 @import url("./abstracts/");
 @import url("./base/");
 @import url("./components/");
+@import url("./pages/");
 
 /* body {
   margin: 0;
