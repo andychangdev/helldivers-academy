@@ -18,7 +18,7 @@ async function getAllStratagems() {
 }
 
 export function DataProvider({ children }) {
-  const [stratagems, setStratagems] = useLocalStorage("stratagems");
+  const [stratagems, setStratagems] = useLocalStorage("stratagems", []);
 
   useEffect(() => {
     async function getData() {
