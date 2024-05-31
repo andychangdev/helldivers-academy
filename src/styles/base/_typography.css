@@ -30,7 +30,7 @@ h3 {
   color: var(--clr-white);
 }
 
-p, ol, a {
+p, ol  {
   font-family: var(--ff-regular);
   font-size: var(--fs-regular);
   font-weight: var(--fw-regular);
@@ -38,8 +38,16 @@ p, ol, a {
   color: var(--clr-text);
 }
 
+a {
+  font-family: var(--ff-regular);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-regular);
+  text-decoration: none;
+  color: var(--clr-white);
+}
+
   a:hover {
-    color: var(--clr-secondary);
+    color: var(--clr-primary);
   }
 
 h3,  p {
