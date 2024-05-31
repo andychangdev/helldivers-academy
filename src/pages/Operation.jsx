@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useData } from "../contexts/dataContext.jsx";
 import soundfx from "../assets/beep.wav";
 import spacebar from "../assets/spacebar.png";
@@ -10,6 +10,12 @@ export function Operation() {
   const [allKeysMatched, setAllKeysMatched] = useState(false);
   const [buttonPressed, setButtonPressed] = useState(false);
   const [interactionStyle, setInteractionStyle] = useState("");
+  const [timer, setTimer] = useState(null);
+  const [stratagemsDeployed, setStratagemsDeployed] = useState(0);
+  const [correctInputs, setCorrectInputs] = useState(0);
+  const [incorrectInputs, setIncorrectInputs] = useState(0);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const timerRef = useRef(null);
   const audio = new Audio(soundfx);
   let count = 0;
   let currentIndex = null;
@@ -38,6 +44,19 @@ export function Operation() {
     }
   }, [randomStratagem, allKeysMatched]);
 
+  useEffect(() => {
+    if (isTimerRunning && timer > 0) {
+      timerRef.current = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (timer === 0) {
+      clearInterval(timerRef.current);
+      setIsTimerRunning(false);
+      loadRandomStratagem();
+    }
+    return () => clearInterval(timerRef.current);
+  }, [isTimerRunning, timer]);
+
   function loadRandomStratagem() {
     const randomIndex = Math.floor(Math.random() * stratagems.length);
     setRandomStratagem(stratagems[randomIndex]);
@@ -46,7 +65,6 @@ export function Operation() {
     setButtonPressed(false);
     setInteractionStyle("");
     count = 0;
-
   }
 
   function handleArrowKeys(event) {
@@ -59,13 +77,24 @@ export function Operation() {
       currentIndex = count;
       setMatchedKeys((prev) => [...prev, currentIndex]);
       count++;
+      if (isTimerRunning) {
+        setCorrectInputs((prev) => prev + 1);
+      }
       audio.play();
       if (count === randomStratagem.keys.length) {
         setAllKeysMatched(true);
       }
     } else {
+      if (isTimerRunning) {
+        if (event.key === " " && allKeysMatched == true) {
+          setCorrectInputs((prev) => prev + 1);
+        } else {
+          setIncorrectInputs((prev) => prev + 1);
+        }
+      }
       setMatchedKeys([]);
       count = 0;
+      setInteractionStyle("wrong");
       setTimeout(() => {
         setInteractionStyle("");
       }, 200);
@@ -81,6 +110,9 @@ export function Operation() {
 
       if (allKeysMatched) {
         setButtonPressed(true);
+        if (isTimerRunning) {
+          setStratagemsDeployed((prev) => prev + 1);
+        }
         setTimeout(() => {
           setButtonPressed(false);
           loadRandomStratagem();
@@ -106,8 +138,19 @@ export function Operation() {
       count = 0;
       setInteractionStyle("wrong");
       setTimeout(() => {
-        setInteractionStyle(""); 
+        setInteractionStyle("");
       }, 200);
+    }
+  }
+
+  function handleTimer() {
+    if (!isTimerRunning && count === 0) {
+      setTimer(60);
+      loadRandomStratagem();
+      setStratagemsDeployed(0);
+      setCorrectInputs(0);
+      setIncorrectInputs(0);
+      setIsTimerRunning(true);
     }
   }
 
@@ -137,9 +180,15 @@ export function Operation() {
 
   return (
     <section className="control-panel">
+      <div onClick={handleTimer}> Button </div>
+      <div className="stats">
+        <p>Time Left: {timer}</p>
+        <p>SPM: {stratagemsDeployed}</p>
+        <p>ACC: {(correctInputs / (correctInputs + incorrectInputs) * 100).toFixed(2) + "%"}</p>
+      </div>
       <div className="stratagem">
         {renderStratagem()}
-        </div>
+      </div>
       <div className={`deploy-button ${buttonPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleButtonClick}>
         <img src={spacebar} className="spacebar__icon" />
         <p className="deploy__text">DEPLOY</p>
