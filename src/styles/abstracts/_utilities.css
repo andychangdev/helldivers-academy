@@ -3,22 +3,26 @@
 
     /* Colour Palette */
     --clr-primary: gold;
-    --clr-secondary: goldenrod;
+    --clr-secondary: #E3DF47;
     --clr-black: #1a1a1a;
     --clr-white: #fafafa;
+    --clr-text: #B8D3D4;
 
     /* Font Family */
-    --ff-regular: Verdana, sans-serif;
-    --ff-heading: Courier, monospace;
+    --ff-regular: "FS SInclair", Courier, monospace;
+    --ff-heading: "FS Sinclair", Courier, monospace;
+    --ff-subheading: "FS SInclair", Courier, monospace;
 
     /* Font Size */
-    --fs-regular: 1rem;
-    --fs-heading: 1.8rem;
-    --fs-subheading: 1.5rem;
+    --fs-regular: 1.2rem;
+    --fs-heading: 2rem;
+    --fs-subheading: 1.7rem;
 
     /* Font Weight */
+    --fw-light: 300;
     --fw-regular: 400;
-    --fw-semibold: 600;
+    --fw-medium: 500;
+    --fw-bold: 700;
 
     /* Spacer */
     --spacer-400: 1rem;

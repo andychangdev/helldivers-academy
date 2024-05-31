@@ -12,33 +12,44 @@
 h1 {
   font-family: var(--ff-heading);
   font-size: var(--fs-heading);
-  font-weight: var(--fw-regular);
+  font-weight: var(--fw-medium);
   color: var(--clr-white);
 }
 
 h2 {
-  font-family: var(--ff-heading);
+  font-family: var(--ff-subheading);
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-regular);
+  color: var(--clr-white);
+}
+
+h3 {
+  font-family: var(--ff-subheading);
   font-size: var(--fs-subheading);
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-regular);
   color: var(--clr-white);
 }
 
 p, ol, a {
-  font-family: var(--ff-heading);
+  font-family: var(--ff-regular);
   font-size: var(--fs-regular);
   font-weight: var(--fw-regular);
   text-decoration: none;
-  color: var(--clr-white);
+  color: var(--clr-text);
 }
 
   a:hover {
     color: var(--clr-secondary);
   }
 
-h1, p {
+h3,  p {
   margin-bottom: var(--spacer-400);
 }
 
   #brandmark_text {
     margin-bottom: 0;
   }
+
+p > span {
+  color: var(--clr-secondary);
+}
