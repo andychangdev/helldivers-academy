@@ -12,6 +12,7 @@ export function Operation() {
   const [interactionStyle, setInteractionStyle] = useState("");
   const audio = new Audio(soundfx);
   let count = 0;
+  let currentIndex = null;
 
   const arrowMap = {
     up: "\u2B06",
@@ -45,6 +46,7 @@ export function Operation() {
     setButtonPressed(false);
     setInteractionStyle("");
     count = 0;
+
   }
 
   function handleArrowKeys(event) {
@@ -54,7 +56,8 @@ export function Operation() {
       (event.key === "ArrowLeft" && randomStratagem.keys[count] === "left") ||
       (event.key === "ArrowRight" && randomStratagem.keys[count] === "right")
     ) {
-      setMatchedKeys((prev) => [...prev, count]);
+      currentIndex = count;
+      setMatchedKeys((prev) => [...prev, currentIndex]);
       count++;
       audio.play();
       if (count === randomStratagem.keys.length) {
@@ -63,7 +66,6 @@ export function Operation() {
     } else {
       setMatchedKeys([]);
       count = 0;
-      setInteractionStyle("wrong");
       setTimeout(() => {
         setInteractionStyle("");
       }, 200);
@@ -123,7 +125,7 @@ export function Operation() {
           {randomStratagem.keys.map((key, index) => (
             <span
               key={index}
-              className={`arrow ${matchedKeys.includes(index+1) ? "matched" : ""}`}
+              className={`arrow ${matchedKeys.includes(index) ? "matched" : ""}`}
             >
               {arrowMap[key]}
             </span>
