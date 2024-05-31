@@ -1,9 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function Footer () {
     return (
-        <footer className="wrapper">
-            <NavLink to={"/userguide"}>User Guide</NavLink>
+        <footer>
+            <Link to={"/about"}>About</Link>
+            <p>/</p>
+            <Link to={"https://github.com/andychangdev/stratajams"}>Github</Link>
         </footer>
     )
 }
