@@ -38,9 +38,11 @@ export function Operation() {
     if (randomStratagem) {
       document.addEventListener("keydown", handleArrowKeys);
       document.addEventListener("keydown", handleSpacebar);
+      document.addEventListener("keydown", handleLetterMKey);
       return () => {
         document.removeEventListener("keydown", handleArrowKeys);
         document.removeEventListener("keydown", handleSpacebar);
+        document.removeEventListener("keydown", handleLetterMKey);
       };
     }
   }, [randomStratagem, allKeysMatched]);
@@ -118,6 +120,29 @@ export function Operation() {
           setDeployPressed(false);
           loadRandomStratagem();
         }, 200);
+      }
+    }
+  }
+
+  function handleLetterMKey(event) {
+    if (event.key === "m") {
+      setMonitorPressed(true);
+      setTimeout(() => {
+        setMonitorPressed(false);
+      }, 200);
+
+      if (!isTimerRunning && count === 0) {
+        setMonitorPressed(true);
+        setTimeout(() => {
+          setMonitorPressed(false);
+        }, 200);
+  
+        setTimer(60);
+        loadRandomStratagem();
+        setStratagemsDeployed(0);
+        setCorrectInputs(0);
+        setIncorrectInputs(0);
+        setIsTimerRunning(true);
       }
     }
   }
