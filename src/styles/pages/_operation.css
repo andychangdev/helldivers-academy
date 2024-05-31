@@ -1,3 +1,29 @@
+.control-panel {
+  margin: auto 0;
+}
+
+.deploy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3b3b3b;
+  height: 50px;
+  width: 140px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.deploy-button p {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: medium;
+  margin: 0;
+}
+
+.spacebar__icon {
+  width: 1.6rem;
+  margin-right: 1rem;
+}
+
 .stratagem {
     display: grid;
     grid-template-rows: auto 1fr;
@@ -5,7 +31,6 @@
     gap: 1rem;
     background-color: #181818;
     border-radius: 10px;
-    margin: auto 0;
     padding: 2rem;
 }
 

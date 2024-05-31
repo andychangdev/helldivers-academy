@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useData } from "../contexts/dataContext.jsx";
 import soundfx from "../assets/beep.wav";
+import spacebar from "../assets/spacebar.png"
 
 export function Operation() {
   const { stratagems } = useData();
@@ -94,8 +95,14 @@ export function Operation() {
   }
 
   return (
-    <section className="stratagem">
-      {renderStratagem()}
+    <section className="control-panel">
+      <div className="stratagem">
+        {renderStratagem()}
+      </div>
+      <button className="deploy-button">
+        <img src={spacebar} className="spacebar__icon" />
+        <p className="deploy__text">DEPLOY</p>
+      </button>
     </section>
   );
 }
