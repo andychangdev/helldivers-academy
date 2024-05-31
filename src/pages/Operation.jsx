@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useData } from "../contexts/dataContext.jsx";
 import soundfx from "../assets/beep.wav";
-import spacebar from "../assets/spacebar.png"
+import spacebar from "../assets/spacebar.png";
 
 export function Operation() {
   const { stratagems } = useData();
   const [randomStratagem, setRandomStratagem] = useState(null);
   const [matchedKeys, setMatchedKeys] = useState([]);
-  const [allKeysMatched, setAllKeysMatched] = useState(false); 
+  const [allKeysMatched, setAllKeysMatched] = useState(false);
+  const [buttonPressed, setButtonPressed] = useState(false);
+  const [interactionStyle, setInteractionStyle] = useState("");
   const audio = new Audio(soundfx);
   let count = 0;
 
@@ -15,7 +17,7 @@ export function Operation() {
     up: "\u2B06",
     down: "\u2B07",
     left: "\u2B05",
-    right: "\u2B95"
+    right: "\u2B95",
   };
 
   useEffect(() => {
@@ -26,11 +28,11 @@ export function Operation() {
 
   useEffect(() => {
     if (randomStratagem) {
-      document.addEventListener('keydown', handleArrowKeys);
-      document.addEventListener('keydown', handleSpacebar);
+      document.addEventListener("keydown", handleArrowKeys);
+      document.addEventListener("keydown", handleSpacebar);
       return () => {
-        document.removeEventListener('keydown', handleArrowKeys);
-        document.removeEventListener('keydown', handleSpacebar);
+        document.removeEventListener("keydown", handleArrowKeys);
+        document.removeEventListener("keydown", handleSpacebar);
       };
     }
   }, [randomStratagem, allKeysMatched]);
@@ -40,6 +42,8 @@ export function Operation() {
     setRandomStratagem(stratagems[randomIndex]);
     setMatchedKeys([]);
     setAllKeysMatched(false);
+    setButtonPressed(false);
+    setInteractionStyle("");
     count = 0;
   }
 
@@ -54,19 +58,54 @@ export function Operation() {
       count++;
       audio.play();
       if (count === randomStratagem.keys.length) {
-        setAllKeysMatched(true); 
+        setAllKeysMatched(true);
       }
     } else {
       setMatchedKeys([]);
       count = 0;
+      setInteractionStyle("wrong");
+      setTimeout(() => {
+        setInteractionStyle("");
+      }, 200);
     }
   }
 
   function handleSpacebar(event) {
     if (event.key === " ") {
+      setButtonPressed(true);
+      setTimeout(() => {
+        setButtonPressed(false);
+      }, 200);
+
       if (allKeysMatched) {
-        loadRandomStratagem();
+        setButtonPressed(true);
+        setTimeout(() => {
+          setButtonPressed(false);
+          loadRandomStratagem();
+        }, 200);
       }
+    }
+  }
+
+  function handleButtonClick() {
+    setButtonPressed(true);
+    setTimeout(() => {
+      setButtonPressed(false);
+    }, 200);
+
+    if (allKeysMatched) {
+      setButtonPressed(true);
+      setTimeout(() => {
+        setButtonPressed(false);
+        loadRandomStratagem();
+      }, 200);
+    } else {
+      setMatchedKeys([]);
+      count = 0;
+      setInteractionStyle("wrong");
+      setTimeout(() => {
+        setInteractionStyle(""); 
+      }, 200);
     }
   }
 
@@ -98,11 +137,11 @@ export function Operation() {
     <section className="control-panel">
       <div className="stratagem">
         {renderStratagem()}
-      </div>
-      <button className="deploy-button">
+        </div>
+      <div className={`deploy-button ${buttonPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleButtonClick}>
         <img src={spacebar} className="spacebar__icon" />
         <p className="deploy__text">DEPLOY</p>
-      </button>
+      </div>
     </section>
   );
 }

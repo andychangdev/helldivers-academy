@@ -6,10 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #3b3b3b;
+  background-color: #2d2d2d;
   height: 50px;
   width: 140px;
   border-radius: 0px 0px 10px 10px;
+  border: 0;
 }
 
 .deploy-button p {
@@ -17,6 +18,10 @@
   font-size: 1.3rem;
   font-weight: medium;
   margin: 0;
+}
+
+.deploy-button.pressed {
+  background-color: #242424; 
 }
 
 .spacebar__icon {
