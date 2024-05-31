@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useData } from "../contexts/dataContext.jsx";
 import soundfx from "../assets/beep.wav";
 import spacebar from "../assets/spacebar.png";
+import mkey from "../assets/mkey.png";
 
 export function Operation() {
   const { stratagems } = useData();
@@ -164,7 +165,7 @@ export function Operation() {
           <h2>{randomStratagem.name}</h2>
         </div>
 
-        <div className="arrow-container">
+        <div className="stratagem__keys">
           {randomStratagem.keys.map((key, index) => (
             <span
               key={index}
@@ -179,25 +180,24 @@ export function Operation() {
   }
 
   return (
-    <section className="control-panel">
-      <div className="bar">
+    <section className="game">
+      <div className="game__bar">
         <p>Time Left: {timer}</p>
-        <div className="stats">
-
+        <div className="game__stats">
           <p>ACC: {(correctInputs / (correctInputs + incorrectInputs) * 100).toFixed(2) + "%"}</p>
           <p>/</p>
           <p>DPM: {stratagemsDeployed}</p>
         </div>
       </div>
-      <div className="stratagem">
+      <div className="game__stratagem">
         {renderStratagem()}
       </div>
-      <div className="buttons">
-        <div className={`deploy-button ${monitorPressed ? "pressed" : ""}`} onClick={handleMonitorEvent}> 
-          <img src={spacebar} className="spacebar__icon" />
+      <div className="game__buttons">
+        <div className={`game__button ${monitorPressed ? "pressed" : ""}`} onClick={handleMonitorEvent}> 
+          <img src={mkey} className="spacebar__icon" />
             <p className="deploy__text">MONITOR</p>
         </div>
-        <div className={`deploy-button ${deployPressed ? "pressed" : ""}`} onClick={handleDeployClick}>
+        <div className={`game__button ${deployPressed ? "pressed" : ""}`} onClick={handleDeployClick}>
           <img src={spacebar} className="spacebar__icon" />
           <p className="deploy__text">DEPLOY</p>
         </div>
