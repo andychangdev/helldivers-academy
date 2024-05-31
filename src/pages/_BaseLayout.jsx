@@ -5,10 +5,10 @@ import { FloatingBoxes } from "../components/FloatingBoxes";
 export function BaseLayout() {
     return (
         <main className="content-grid">
-        <FloatingBoxes />
         <Header />
         <Outlet />
         <Footer />
+        <FloatingBoxes />
         </main>
     )
 }
