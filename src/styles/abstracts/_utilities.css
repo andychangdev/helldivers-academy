@@ -25,6 +25,7 @@
     --fw-bold: 700;
 
     /* Spacer */
+    --spacer-300: 0.5rem;
     --spacer-400: 1rem;
     --spacer-500: 2rem;
   }
