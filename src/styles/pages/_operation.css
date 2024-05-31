@@ -41,7 +41,7 @@
   margin: 0;
 }
 
-.deploy-button.pressed {
+.game__button.pressed {
   background-color: #242424; 
 }
 
