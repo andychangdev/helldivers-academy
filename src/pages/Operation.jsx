@@ -10,7 +10,6 @@ export function Operation() {
   const [allKeysMatched, setAllKeysMatched] = useState(false);
   const [deployPressed, setDeployPressed] = useState(false);
   const [monitorPressed, setMonitorPressed] = useState(false);
-  const [interactionStyle, setInteractionStyle] = useState("");
   const [timer, setTimer] = useState(0);
   const [stratagemsDeployed, setStratagemsDeployed] = useState(0);
   const [correctInputs, setCorrectInputs] = useState(0);
@@ -38,11 +37,11 @@ export function Operation() {
     if (randomStratagem) {
       document.addEventListener("keydown", handleArrowKeys);
       document.addEventListener("keydown", handleSpacebar);
-      document.addEventListener("keydown", handleLetterMKey);
+      document.addEventListener("keydown", handleMonitorEvent);
       return () => {
         document.removeEventListener("keydown", handleArrowKeys);
         document.removeEventListener("keydown", handleSpacebar);
-        document.removeEventListener("keydown", handleLetterMKey);
+        document.removeEventListener("keydown", handleMonitorEvent);
       };
     }
   }, [randomStratagem, allKeysMatched]);
@@ -66,7 +65,6 @@ export function Operation() {
     setMatchedKeys([]);
     setAllKeysMatched(false);
     setDeployPressed(false);
-    setInteractionStyle("");
     count = 0;
   }
 
@@ -97,62 +95,34 @@ export function Operation() {
       }
       setMatchedKeys([]);
       count = 0;
-      setInteractionStyle("wrong");
-      setTimeout(() => {
-        setInteractionStyle("");
-      }, 200);
     }
+  }
+
+  function buttonTransition(setPressed) {
+    setPressed(true);
+    setTimeout(() => {
+      setPressed(false);
+    }, 200);
   }
 
   function handleSpacebar(event) {
     if (event.key === " ") {
-      setDeployPressed(true);
-      setTimeout(() => {
-        setDeployPressed(false);
-      }, 200);
-
+      buttonTransition(setDeployPressed)
       if (allKeysMatched) {
         setDeployPressed(true);
+      setTimeout(() => {
+        loadRandomStratagem();
+        setDeployPressed(false);
+      }, 200);
         if (isTimerRunning) {
           setStratagemsDeployed((prev) => prev + 1);
         }
-        setTimeout(() => {
-          setDeployPressed(false);
-          loadRandomStratagem();
-        }, 200);
-      }
-    }
-  }
-
-  function handleLetterMKey(event) {
-    if (event.key === "m") {
-      setMonitorPressed(true);
-      setTimeout(() => {
-        setMonitorPressed(false);
-      }, 200);
-
-      if (!isTimerRunning && count === 0) {
-        setMonitorPressed(true);
-        setTimeout(() => {
-          setMonitorPressed(false);
-        }, 200);
-  
-        setTimer(60);
-        loadRandomStratagem();
-        setStratagemsDeployed(0);
-        setCorrectInputs(0);
-        setIncorrectInputs(0);
-        setIsTimerRunning(true);
       }
     }
   }
 
   function handleDeployClick() {
-    setDeployPressed(true);
-    setTimeout(() => {
-      setDeployPressed(false);
-    }, 200);
-
+    buttonTransition(setDeployPressed)
     if (allKeysMatched) {
       setDeployPressed(true);
       setTimeout(() => {
@@ -162,31 +132,25 @@ export function Operation() {
     } else {
       setMatchedKeys([]);
       count = 0;
-      setInteractionStyle("wrong");
-      setTimeout(() => {
-        setInteractionStyle("");
-      }, 200);
     }
   }
 
-  function handleMonitorClick() {
-    setMonitorPressed(true);
-    setTimeout(() => {
-      setMonitorPressed(false);
-    }, 200);
-
+  function startMonitoring () {
     if (!isTimerRunning && count === 0) {
-      setMonitorPressed(true);
-      setTimeout(() => {
-        setMonitorPressed(false);
-      }, 200);
-
+      buttonTransition(setMonitorPressed)
       setTimer(60);
-      loadRandomStratagem();
+      setIsTimerRunning(true);
       setStratagemsDeployed(0);
       setCorrectInputs(0);
       setIncorrectInputs(0);
-      setIsTimerRunning(true);
+      loadRandomStratagem();
+    }
+  }
+  
+  function handleMonitorEvent(event) {
+    if (event.type === "click" || (event.type === "keydown" && event.key === "m")) {
+      buttonTransition(setMonitorPressed)
+      startMonitoring();
     }
   }
 
@@ -229,13 +193,13 @@ export function Operation() {
         {renderStratagem()}
       </div>
       <div className="buttons">
-        <div className={`deploy-button ${deployPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleDeployClick}>
-          <img src={spacebar} className="spacebar__icon" />
-          <p className="deploy__text">DEPLOY</p>
-        </div>
-        <div className={`deploy-button ${monitorPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleMonitorClick}> 
+        <div className={`deploy-button ${monitorPressed ? "pressed" : ""}`} onClick={handleMonitorEvent}> 
           <img src={spacebar} className="spacebar__icon" />
             <p className="deploy__text">MONITOR</p>
+        </div>
+        <div className={`deploy-button ${deployPressed ? "pressed" : ""}`} onClick={handleDeployClick}>
+          <img src={spacebar} className="spacebar__icon" />
+          <p className="deploy__text">DEPLOY</p>
         </div>
       </div>
 
