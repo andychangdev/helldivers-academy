@@ -6,18 +6,18 @@ export function FloatingBoxes() {
     const [randomImages, setRandomImages] = useState([]);
 
     useEffect(() => {
-        const newRandomImages = Array.from({ length: 10 }, () => {
-            const randomIndex = Math.floor(Math.random() * stratagems.length-1);
-            return stratagems[randomIndex].imageUrl;
-        });
-        setRandomImages(newRandomImages);
+        function getRandomImage() {
+            if (stratagems.length === 0) return ''; 
+            const randomIndex = Math.floor(Math.random() * stratagems.length); 
+            return stratagems[randomIndex]?.imageUrl || ''; 
+        };
+
+        const generateRandomImages = () => Array.from({ length: 10 }, getRandomImage);
+
+        setRandomImages(generateRandomImages());
 
         const interval = setInterval(() => {
-            const newRandomImages = Array.from({ length: 10 }, () => {
-                const randomIndex = Math.floor(Math.random() * stratagems.length-1);
-                return stratagems[randomIndex].imageUrl;
-            });
-            setRandomImages(newRandomImages);
+            setRandomImages(generateRandomImages());
         }, 10000);
 
         return () => clearInterval(interval);
