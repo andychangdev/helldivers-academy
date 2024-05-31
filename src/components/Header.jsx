@@ -4,7 +4,7 @@ import logo from "../assets/icon.png"
 
 export function Header() {
   return (
-      <header className="wrapper">
+      <header>
           <NavLink to={"/"} id="brandmark">
             <img src={logo} id="brandmark__logo" alt="Stratajams logo" />
             <h1 id="brandmark_text">Stratajams</h1>
