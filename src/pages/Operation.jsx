@@ -1,38 +1,48 @@
 import { useEffect, useState } from "react";
 import { useData } from "../contexts/dataContext.jsx";
-import soundfx from "../assets/beep.wav"
+import soundfx from "../assets/beep.wav";
 
 export function Operation() {
   const { stratagems } = useData();
   const [randomStratagem, setRandomStratagem] = useState(null);
   const [matchedKeys, setMatchedKeys] = useState([]);
-  const audio = new Audio(soundfx)
+  const [allKeysMatched, setAllKeysMatched] = useState(false); 
+  const audio = new Audio(soundfx);
   let count = 0;
 
   const arrowMap = {
-    up: "\u2B06", 
+    up: "\u2B06",
     down: "\u2B07",
-    left: "\u2B05", 
-    right: "\u2B95" 
+    left: "\u2B05",
+    right: "\u2B95"
   };
 
   useEffect(() => {
     if (stratagems && stratagems.length > 0) {
-      const randomIndex = Math.floor(Math.random() * stratagems.length-1);
-      setRandomStratagem(stratagems[randomIndex]);
+      loadRandomStratagem();
     }
   }, [stratagems]);
 
   useEffect(() => {
     if (randomStratagem) {
-      document.addEventListener('keydown', customFunction);
+      document.addEventListener('keydown', handleArrowKeys);
+      document.addEventListener('keydown', handleSpacebar);
       return () => {
-        document.removeEventListener('keydown', customFunction);
+        document.removeEventListener('keydown', handleArrowKeys);
+        document.removeEventListener('keydown', handleSpacebar);
       };
     }
-  }, [randomStratagem]);
+  }, [randomStratagem, allKeysMatched]);
 
-  function customFunction(event) {
+  function loadRandomStratagem() {
+    const randomIndex = Math.floor(Math.random() * stratagems.length);
+    setRandomStratagem(stratagems[randomIndex]);
+    setMatchedKeys([]);
+    setAllKeysMatched(false);
+    count = 0;
+  }
+
+  function handleArrowKeys(event) {
     if (
       (event.key === "ArrowUp" && randomStratagem.keys[count] === "up") ||
       (event.key === "ArrowDown" && randomStratagem.keys[count] === "down") ||
@@ -42,9 +52,20 @@ export function Operation() {
       setMatchedKeys((prev) => [...prev, count]);
       count++;
       audio.play();
+      if (count === randomStratagem.keys.length) {
+        setAllKeysMatched(true); 
+      }
     } else {
       setMatchedKeys([]);
       count = 0;
+    }
+  }
+
+  function handleSpacebar(event) {
+    if (event.key === " ") {
+      if (allKeysMatched) {
+        loadRandomStratagem();
+      }
     }
   }
 
