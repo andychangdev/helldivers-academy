@@ -1,0 +1,24 @@
+#briefing {
+    background-color: #181818;;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+}
+
+.mouse {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+
+.mouse__text {
+    font-size: 1.5rem;
+    font-weight: var(--fw-medium);
+    margin: 0;
+}
+
+
+.mouse__icon {
+    width: 1.3rem;
+    margin-right: 1rem;
+}
