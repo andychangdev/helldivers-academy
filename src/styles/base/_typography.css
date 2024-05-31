@@ -51,7 +51,7 @@ a {
   font-size: var(--fs-regular);
   font-weight: var(--fw-regular);
   text-decoration: none;
-  color: var(--clr-white);
+  color: var(--clr-secondary);
 }
 
   a:hover {
