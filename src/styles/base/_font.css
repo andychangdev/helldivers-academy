@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Swiss 721";
+    src: url("../../assets/fonts/Swiss721-Extended-Bold.otf");
+  }
+
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("../../assets/fonts/fs-sinclair/FSSinclair-Regular.otf");
+    font-weight: 400;
+  }
+
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("../../assets/fonts/fs-sinclair/FSSinclair-Light.otf");
+    font-weight: 300;
+  }
+
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("../../assets/fonts/fs-sinclair/FSSinclair-Medium.otf");
+    font-weight: 500;
+  }
+
+@font-face {
+    font-family: "FS Sinclair";
+    src: url("../../assets/fonts/fs-sinclair/FSSinclair-Bold.otf");
+    font-weight: 700;
+  }
