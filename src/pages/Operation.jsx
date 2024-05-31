@@ -10,7 +10,7 @@ export function Operation() {
   const [allKeysMatched, setAllKeysMatched] = useState(false);
   const [buttonPressed, setButtonPressed] = useState(false);
   const [interactionStyle, setInteractionStyle] = useState("");
-  const [timer, setTimer] = useState(null);
+  const [timer, setTimer] = useState(0);
   const [stratagemsDeployed, setStratagemsDeployed] = useState(0);
   const [correctInputs, setCorrectInputs] = useState(0);
   const [incorrectInputs, setIncorrectInputs] = useState(0);
@@ -180,19 +180,29 @@ export function Operation() {
 
   return (
     <section className="control-panel">
-      <div onClick={handleTimer}> Button </div>
-      <div className="stats">
+      <div className="bar">
         <p>Time Left: {timer}</p>
-        <p>SPM: {stratagemsDeployed}</p>
-        <p>ACC: {(correctInputs / (correctInputs + incorrectInputs) * 100).toFixed(2) + "%"}</p>
+        <div className="stats">
+
+          <p>ACC: {(correctInputs / (correctInputs + incorrectInputs) * 100).toFixed(2) + "%"}</p>
+          <p>/</p>
+          <p>DPM: {stratagemsDeployed}</p>
+        </div>
       </div>
       <div className="stratagem">
         {renderStratagem()}
       </div>
-      <div className={`deploy-button ${buttonPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleButtonClick}>
-        <img src={spacebar} className="spacebar__icon" />
-        <p className="deploy__text">DEPLOY</p>
+      <div className="buttons">
+        <div className={`deploy-button ${buttonPressed ? "pressed" : ""} ${interactionStyle}`} onClick={handleButtonClick}>
+          <img src={spacebar} className="spacebar__icon" />
+          <p className="deploy__text">DEPLOY</p>
+        </div>
+        <div className="deploy-button" onClick={handleTimer}> 
+          <img src={spacebar} className="spacebar__icon" />
+            <p className="deploy__text">MONITOR</p>
+        </div>
       </div>
+
     </section>
   );
 }
