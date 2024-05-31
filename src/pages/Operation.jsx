@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useData } from "../contexts/dataContext.jsx";
 import soundfx from "../assets/beep.wav"
 
-export function HomePage() {
+export function Operation() {
   const { stratagems } = useData();
   const [randomStratagem, setRandomStratagem] = useState(null);
   const [matchedKeys, setMatchedKeys] = useState([]);
