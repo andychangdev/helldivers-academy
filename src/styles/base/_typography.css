@@ -1,7 +1,7 @@
 :root {
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1b1b1b;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,6 +13,13 @@ h1 {
   font-family: var(--ff-heading);
   font-size: var(--fs-heading);
   font-weight: var(--fw-regular);
+  color: var(--clr-white);
+}
+
+h2 {
+  font-family: var(--ff-heading);
+  font-size: var(--fs-subheading);
+  font-weight: var(--fw-semibold);
   color: var(--clr-white);
 }
 
